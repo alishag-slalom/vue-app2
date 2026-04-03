@@ -11,7 +11,8 @@ defineProps<{
     :href="url"
     target="_blank"
     rel="noopener noreferrer"
-    variant="outlined"
+    variant="tonal"
+    color="primary"
     size="large"
     block
     rounded="lg"

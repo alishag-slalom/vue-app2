@@ -10,7 +10,6 @@ function toggleTheme() {
 
 const links = [
   { label: 'Portfolio', url: 'https://alishageeslin.com', icon: 'mdi-briefcase-outline' },
-  { label: 'Dribbble', url: 'https://dribbble.com/alishageeslin', icon: 'mdi-basketball' },
   { label: 'LinkedIn', url: 'https://linkedin.com/in/alishageeslin', icon: 'mdi-linkedin' },
   { label: 'Email', url: 'mailto:hello@alishageeslin.com', icon: 'mdi-email-outline' },
 ]
@@ -31,7 +30,7 @@ const links = [
 
     <v-row align="center" justify="center" class="fill-height">
       <v-col cols="12" sm="8" md="6" lg="5" xl="4">
-        <v-card class="pa-8 text-center" rounded="xl" variant="outlined">
+        <v-card class="pa-8 text-center bio-card" rounded="xl" elevation="8">
           <div class="d-flex justify-center mb-4">
             <v-avatar size="120" color="surface-variant">
               <span class="text-h4 font-weight-bold" style="color: rgb(var(--v-theme-primary))">AG</span>
@@ -68,5 +67,10 @@ const links = [
   top: 1rem;
   right: 1rem;
   z-index: 100;
+}
+
+.bio-card {
+  background: rgb(var(--v-theme-surface)) !important;
+  border: 1px solid rgba(var(--v-theme-primary), 0.08);
 }
 </style>
