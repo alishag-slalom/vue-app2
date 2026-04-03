@@ -3,15 +3,34 @@ import { RouterLink } from 'vue-router'
 import ThemeToggle from '@/components/ThemeToggle.vue'
 
 const links = [
-  { label: 'Portfolio', url: 'https://alishageeslin.com' },
-  { label: 'Dribbble', url: 'https://dribbble.com/alishageeslin' },
-  { label: 'LinkedIn', url: 'https://linkedin.com/in/alishageeslin' },
-  { label: 'Email', url: 'mailto:hello@alishageeslin.com' },
+  {
+    label: 'Portfolio',
+    url: 'https://alishageeslin.com',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><polyline points="16 3 12 7 8 3"/></svg>',
+  },
+  {
+    label: 'Dribbble',
+    url: 'https://dribbble.com/alishageeslin',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M19.13 5.09C15.22 9.14 10 10.44 2.25 10.94"/><path d="M21.75 12.84c-6.62-1.41-12.14 1-16.38 6.32"/><path d="M8.56 2.75c4.37 6 6 9.42 8 17.72"/></svg>',
+  },
+  {
+    label: 'LinkedIn',
+    url: 'https://linkedin.com/in/alishageeslin',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>',
+  },
+  {
+    label: 'Email',
+    url: 'mailto:hello@alishageeslin.com',
+    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>',
+  },
 ]
 </script>
 
 <template>
   <div class="bio-page">
+    <nav class="top-nav">
+      <RouterLink to="/about" class="about-link">About Me</RouterLink>
+    </nav>
     <ThemeToggle />
 
     <div class="card">
@@ -31,16 +50,22 @@ const links = [
           rel="noopener noreferrer"
           class="link-button"
         >
+          <span class="link-icon" v-html="link.icon"></span>
           {{ link.label }}
         </a>
       </div>
-
-      <RouterLink to="/about" class="about-link">About Me</RouterLink>
     </div>
   </div>
 </template>
 
 <style scoped>
+.top-nav {
+  position: fixed;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 100;
+}
+
 .bio-page {
   min-height: 100vh;
   display: flex;
@@ -99,7 +124,10 @@ const links = [
 }
 
 .link-button {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
   width: 100%;
   padding: 1rem;
   text-align: center;
