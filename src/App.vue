@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+import AppNavBar from '@/components/AppNavBar.vue'
 </script>
 
 <template>
   <v-app class="app-bg">
+    <AppNavBar />
     <v-main>
       <RouterView />
     </v-main>

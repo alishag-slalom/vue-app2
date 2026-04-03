@@ -6,10 +6,6 @@
     <v-row align="center" justify="center" class="fill-height">
       <v-col cols="12" sm="8" md="6" lg="5" xl="4">
         <v-card class="pa-8 about-card" rounded="xl" elevation="8">
-          <v-btn to="/" variant="text" color="primary" class="text-none mb-4" prepend-icon="mdi-arrow-left">
-            Back
-          </v-btn>
-
           <v-card-title class="text-h5 font-weight-bold px-0">About Alisha</v-card-title>
 
           <v-card-text class="px-0 text-body-1">
