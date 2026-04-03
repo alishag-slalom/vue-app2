@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { RouterLink } from 'vue-router'
 import ThemeToggle from '@/components/ThemeToggle.vue'
 
 const links = [
@@ -33,6 +34,8 @@ const links = [
           {{ link.label }}
         </a>
       </div>
+
+      <RouterLink to="/about" class="about-link">About Me</RouterLink>
     </div>
   </div>
 </template>
@@ -118,5 +121,18 @@ const links = [
 
 .link-button:active {
   transform: translateY(0);
+}
+
+.about-link {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.about-link:hover {
+  opacity: 0.7;
 }
 </style>
