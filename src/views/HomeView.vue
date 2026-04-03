@@ -1,166 +1,72 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
-import ThemeToggle from '@/components/ThemeToggle.vue'
+import { useTheme } from 'vuetify'
+import LinkButton from '@/components/LinkButton.vue'
+
+const theme = useTheme()
+
+function toggleTheme() {
+  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
+}
 
 const links = [
-  {
-    label: 'Portfolio',
-    url: 'https://alishageeslin.com',
-    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><polyline points="16 3 12 7 8 3"/></svg>',
-  },
-  {
-    label: 'Dribbble',
-    url: 'https://dribbble.com/alishageeslin',
-    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M19.13 5.09C15.22 9.14 10 10.44 2.25 10.94"/><path d="M21.75 12.84c-6.62-1.41-12.14 1-16.38 6.32"/><path d="M8.56 2.75c4.37 6 6 9.42 8 17.72"/></svg>',
-  },
-  {
-    label: 'LinkedIn',
-    url: 'https://linkedin.com/in/alishageeslin',
-    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>',
-  },
-  {
-    label: 'Email',
-    url: 'mailto:hello@alishageeslin.com',
-    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>',
-  },
+  { label: 'Portfolio', url: 'https://alishageeslin.com', icon: 'mdi-briefcase-outline' },
+  { label: 'Dribbble', url: 'https://dribbble.com/alishageeslin', icon: 'mdi-basketball' },
+  { label: 'LinkedIn', url: 'https://linkedin.com/in/alishageeslin', icon: 'mdi-linkedin' },
+  { label: 'Email', url: 'mailto:hello@alishageeslin.com', icon: 'mdi-email-outline' },
 ]
 </script>
 
 <template>
-  <div class="bio-page">
-    <nav class="top-nav">
-      <RouterLink to="/about" class="about-link">About Me</RouterLink>
-    </nav>
-    <ThemeToggle />
+  <v-container class="fill-height" fluid>
+    <v-btn
+      icon
+      variant="text"
+      size="small"
+      class="theme-toggle"
+      :aria-label="theme.global.current.value.dark ? 'Switch to light mode' : 'Switch to dark mode'"
+      @click="toggleTheme"
+    >
+      <v-icon>{{ theme.global.current.value.dark ? 'mdi-white-balance-sunny' : 'mdi-moon-waning-crescent' }}</v-icon>
+    </v-btn>
 
-    <div class="card">
-      <div class="avatar">
-        <span class="avatar-placeholder">AG</span>
-      </div>
+    <v-row align="center" justify="center" class="fill-height">
+      <v-col cols="12" sm="8" md="6" lg="5" xl="4">
+        <v-card class="pa-8 text-center" rounded="xl" variant="outlined">
+          <div class="d-flex justify-center mb-4">
+            <v-avatar size="120" color="surface-variant">
+              <span class="text-h4 font-weight-bold" style="color: rgb(var(--v-theme-primary))">AG</span>
+            </v-avatar>
+          </div>
 
-      <h1 class="name">Alisha Geeslin</h1>
-      <p class="tagline">Designer · Developer · Creative Thinker</p>
+          <v-card-title class="text-h5 font-weight-bold pb-1">Alisha Geeslin</v-card-title>
+          <v-card-subtitle class="pb-6">Designer · Developer · Creative Thinker</v-card-subtitle>
 
-      <div class="links">
-        <a
-          v-for="link in links"
-          :key="link.label"
-          :href="link.url"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="link-button"
-        >
-          <span class="link-icon" v-html="link.icon"></span>
-          {{ link.label }}
-        </a>
-      </div>
-    </div>
-  </div>
+          <v-card-text class="pa-0">
+            <div class="d-flex flex-column ga-3">
+              <LinkButton
+                v-for="link in links"
+                :key="link.label"
+                :label="link.label"
+                :url="link.url"
+                :icon="link.icon"
+              />
+            </div>
+          </v-card-text>
+
+          <v-card-actions class="justify-center pt-4">
+            <v-btn to="/about" variant="text" color="primary" class="text-none">About Me</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <style scoped>
-.top-nav {
+.theme-toggle {
   position: fixed;
-  top: 1.25rem;
-  left: 1.25rem;
+  top: 1rem;
+  right: 1rem;
   z-index: 100;
-}
-
-.bio-page {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 1rem;
-  position: relative;
-}
-
-.card {
-  width: 100%;
-  max-width: 480px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-.avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: var(--color-avatar-bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 0.5rem;
-  border: 3px solid var(--color-accent);
-}
-
-.avatar-placeholder {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--color-accent);
-  user-select: none;
-}
-
-.name {
-  font-size: 1.75rem;
-  font-weight: 700;
-  margin: 0;
-  color: var(--color-heading);
-}
-
-.tagline {
-  font-size: 0.95rem;
-  color: var(--color-text-muted);
-  margin: 0 0 1rem 0;
-}
-
-.links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  width: 100%;
-}
-
-.link-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  width: 100%;
-  padding: 1rem;
-  text-align: center;
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--color-button-text);
-  background: var(--color-button-bg);
-  border: 1.5px solid var(--color-button-border);
-  border-radius: 12px;
-  text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-}
-
-.link-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px var(--color-button-shadow);
-  background: var(--color-button-hover-bg);
-}
-
-.link-button:active {
-  transform: translateY(0);
-}
-
-.about-link {
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--color-accent);
-  text-decoration: none;
-  transition: opacity 0.2s ease;
-}
-
-.about-link:hover {
-  opacity: 0.7;
 }
 </style>
